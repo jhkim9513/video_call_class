@@ -4,6 +4,7 @@ import {
   InfoFormBtn,
   InfoFormDiv,
   InfoFormContainer,
+  InfoFormSubmitBtn,
 } from "../../../styledComponents/main/infoForm/infoFormStyle";
 import { connect } from "react-redux";
 import { inputNickName, setNickName } from "../../../redux/user/actions";
@@ -60,7 +61,7 @@ class InfoForm extends Component {
   /* ----------------- Redner  ----------------- */
   render() {
     const { nickName, roomName, hasNickName, hasRoom } = this.props;
-
+    const isConnect = hasNickName && hasRoom ? true : false;
     return (
       <InfoFormContainer onSubmit={(e) => this.onSubmit(e)}>
         <InfoFormDiv>
@@ -94,7 +95,7 @@ class InfoForm extends Component {
             {hasRoom ? "완료" : "저장"}
           </InfoFormBtn>
         </InfoFormDiv>
-        <button>입장하기</button>
+        <InfoFormSubmitBtn isConnect={isConnect}>입장하기</InfoFormSubmitBtn>
       </InfoFormContainer>
     );
   }
