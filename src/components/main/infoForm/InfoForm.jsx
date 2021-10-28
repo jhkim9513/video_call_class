@@ -41,17 +41,13 @@ class InfoForm extends Component {
     e.preventDefault();
     if (hasRoom && hasNickName) {
       this.props.history.push("/loading");
+    } else {
+      alert("닉네임과 입장하실 방 이름을 저장해주세요.");
     }
   };
 
   /* ----------------- LifeCycle  ----------------- */
 
-  // componentDidMount() {
-  //   const { hasRoom, hasNickName } = this.props;
-  //   if (!hasRoom || !hasNickName) {
-  //     this.props.history.push("/");
-  //   }
-  // }
   /* ----------------- Redner  ----------------- */
   render() {
     const { nickName, roomName } = this.props;

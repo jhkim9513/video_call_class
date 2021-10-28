@@ -16,7 +16,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={InfoForm} />
             <Route exact path="/loading" component={Loading} />
-            <Route exact path="/video" component={VideoScreen} />
+            <Route exact path="/videoScreen" component={VideoScreen} />
           </Switch>
         </BrowserRouter>
       </AppContainer>
