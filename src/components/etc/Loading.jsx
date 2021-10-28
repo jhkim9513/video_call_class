@@ -22,8 +22,11 @@ class Loading extends Component {
 
   componentDidUpdate() {
     const { myStream, peerConnection } = this.props;
-    console.log("didUpdate!");
-    console.log(`this.props : ${JSON.stringify(this.props)}`);
+    if (myStream === "don't have stream") {
+      makeConnection();
+      this.props.history.push("/videoScreen");
+      return;
+    }
     if (myStream && !peerConnection) {
       makeConnection();
     }

@@ -19,9 +19,11 @@ const makeConnection = () => {
   const myStream = store.getState().roomReducer.myStream;
 
   // 양쪽 브라우저에서 카메라, 마이크 데이터 stream을 받아서 구성  통상의 addStream 대신하는 작업
-  myStream.getTracks().forEach((track) => {
-    tempMyPeerConnection.addTrack(track, myStream);
-  });
+  if (typeof myStream !== "string") {
+    myStream.getTracks().forEach((track) => {
+      tempMyPeerConnection.addTrack(track, myStream);
+    });
+  }
 
   store.dispatch(setPeerConnection(tempMyPeerConnection));
 };

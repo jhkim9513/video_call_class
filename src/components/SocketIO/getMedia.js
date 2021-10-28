@@ -17,6 +17,7 @@ async function getMedia(deviceId) {
 
     store.dispatch(setMyStream(myMediaStream));
   } catch (e) {
+    store.dispatch(setMyStream("don't have stream"));
     console.log(e);
   }
 }

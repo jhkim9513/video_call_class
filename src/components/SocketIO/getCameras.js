@@ -5,7 +5,7 @@ async function getCameras(selectRef) {
     const myStream = store.getState().roomReducer.myStream;
     const devices = await navigator.mediaDevices.enumerateDevices();
     const cameras = devices.filter((device) => device.kind === "videoinput");
-    const currentCamera = myStream.getVideoTracks()[0];
+    const currentCamera = myStream?.getVideoTracks()[0];
     cameras.forEach((camera) => {
       const option = document.createElement("option");
       option.value = camera.deviceId;

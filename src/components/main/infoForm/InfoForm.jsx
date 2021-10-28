@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { FormTitleH1 } from "../../../styledComponents/main/infoForm/infoFormStyle";
+import {
+  InfoFormTitleH1,
+  InfoFormBtn,
+  InfoFormDiv,
+  InfoFormContainer,
+} from "../../../styledComponents/main/infoForm/infoFormStyle";
 import { connect } from "react-redux";
 import { inputNickName, setNickName } from "../../../redux/user/actions";
 import { inputRoomName, setRoomName } from "../../../redux/room/actions";
@@ -9,6 +14,8 @@ class InfoForm extends Component {
     super(props);
     this.state = {};
   }
+
+  inputNickNameRef = React.createRef();
 
   /* ----------------- Methods  ----------------- */
   inputNickName(e) {
@@ -47,34 +54,48 @@ class InfoForm extends Component {
   };
 
   /* ----------------- LifeCycle  ----------------- */
-
+  componentDidMount() {
+    this.inputNickNameRef.current.focus();
+  }
   /* ----------------- Redner  ----------------- */
   render() {
-    const { nickName, roomName } = this.props;
-    console.log(this.props);
+    const { nickName, roomName, hasNickName, hasRoom } = this.props;
 
     return (
-      <form onSubmit={(e) => this.onSubmit(e)}>
-        <div>
-          <FormTitleH1>닉네임</FormTitleH1>
+      <InfoFormContainer onSubmit={(e) => this.onSubmit(e)}>
+        <InfoFormDiv>
+          <InfoFormTitleH1>닉네임</InfoFormTitleH1>
           <input
             type="text"
             value={nickName}
             onChange={(e) => this.inputNickName(e)}
+            ref={this.inputNickNameRef}
           />
-          <button onClick={(e) => this.saveNicKName(e)}>저장</button>
-        </div>
-        <div>
-          <FormTitleH1>방 이름</FormTitleH1>
+          <InfoFormBtn
+            onClick={(e) => {
+              this.saveNicKName(e);
+            }}
+            isComplete={hasNickName}
+          >
+            {hasNickName ? "완료" : "저장"}
+          </InfoFormBtn>
+        </InfoFormDiv>
+        <InfoFormDiv>
+          <InfoFormTitleH1>방 이름</InfoFormTitleH1>
           <input
             type="text"
             value={roomName}
             onChange={(e) => this.inputRoomName(e)}
           />
-          <button onClick={(e) => this.saveRoomName(e)}>저장</button>
-        </div>
+          <InfoFormBtn
+            onClick={(e) => this.saveRoomName(e)}
+            isComplete={hasRoom}
+          >
+            {hasRoom ? "완료" : "저장"}
+          </InfoFormBtn>
+        </InfoFormDiv>
         <button>입장하기</button>
-      </form>
+      </InfoFormContainer>
     );
   }
 }

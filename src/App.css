@@ -1,6 +1,6 @@
 .anony {
-  flex-direction: column;
-  justify-content: flex-start;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 

@@ -66,7 +66,7 @@ class VideoScreen extends Component {
 
   /* ----------------- Redner  ----------------- */
   render() {
-    const { muteBtn, cameraBtn, roomName } = this.props;
+    const { muteBtn, cameraBtn, roomName, myStream } = this.props;
     return (
       <div>
         <h1>Room : {roomName}</h1>
@@ -82,21 +82,29 @@ class VideoScreen extends Component {
           width="500px"
           height="500px"
         ></video>
-        <button className="muteBtn" onClick={(e) => this.clickMuteBtn(e)}>
-          {!muteBtn ? (
-            <i className="fas fa-volume-up"></i>
-          ) : (
-            <i className="fas fa-volume-mute"></i>
-          )}
-        </button>
-        <button className="cameraBtn" onClick={(e) => this.clickCameraBtn(e)}>
-          {!cameraBtn ? (
-            <i className="fas fa-video"></i>
-          ) : (
-            <i className="fas fa-video-slash"></i>
-          )}
-        </button>
-        <select className="selectCamera" ref={this.selectRef}></select>
+
+        {myStream !== "don't have stream" && (
+          <div>
+            <button className="muteBtn" onClick={(e) => this.clickMuteBtn(e)}>
+              {!muteBtn ? (
+                <i className="fas fa-volume-up"></i>
+              ) : (
+                <i className="fas fa-volume-mute"></i>
+              )}
+            </button>
+            <button
+              className="cameraBtn"
+              onClick={(e) => this.clickCameraBtn(e)}
+            >
+              {!cameraBtn ? (
+                <i className="fas fa-video"></i>
+              ) : (
+                <i className="fas fa-video-slash"></i>
+              )}
+            </button>
+            <select className="selectCamera" ref={this.selectRef}></select>
+          </div>
+        )}
       </div>
     );
   }
