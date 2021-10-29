@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { LoadingDiv } from "../../styledComponents/etc/loadingStyle";
 import getMedia from "../SocketIO/getMedia";
 import makeConnection from "../SocketIO/makeConnection";
 
@@ -37,7 +38,7 @@ class Loading extends Component {
 
   /* ----------------- Redner  ----------------- */
   render() {
-    return <div>loading</div>;
+    return <LoadingDiv></LoadingDiv>;
   }
 }
 

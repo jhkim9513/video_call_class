@@ -3,8 +3,9 @@ import {
   InfoFormTitleH1,
   InfoFormBtn,
   InfoFormDiv,
-  InfoFormContainer,
+  InfoFormWrapper,
   InfoFormSubmitBtn,
+  InfoFormInput,
 } from "../../../styledComponents/main/infoForm/infoFormStyle";
 import { connect } from "react-redux";
 import { inputNickName, setNickName } from "../../../redux/user/actions";
@@ -17,6 +18,7 @@ class InfoForm extends Component {
   }
 
   inputNickNameRef = React.createRef();
+  inputRoomNameRef = React.createRef();
 
   /* ----------------- Methods  ----------------- */
   inputNickName(e) {
@@ -29,6 +31,7 @@ class InfoForm extends Component {
     const { nickName } = this.props;
     e.preventDefault();
     dispatchSetNickName(nickName);
+    this.inputRoomNameRef.current.focus();
   }
 
   inputRoomName(e) {
@@ -63,10 +66,10 @@ class InfoForm extends Component {
     const { nickName, roomName, hasNickName, hasRoom } = this.props;
     const isConnect = hasNickName && hasRoom ? true : false;
     return (
-      <InfoFormContainer onSubmit={(e) => this.onSubmit(e)}>
+      <InfoFormWrapper onSubmit={(e) => this.onSubmit(e)}>
         <InfoFormDiv>
           <InfoFormTitleH1>닉네임</InfoFormTitleH1>
-          <input
+          <InfoFormInput
             type="text"
             value={nickName}
             onChange={(e) => this.inputNickName(e)}
@@ -82,11 +85,12 @@ class InfoForm extends Component {
           </InfoFormBtn>
         </InfoFormDiv>
         <InfoFormDiv>
-          <InfoFormTitleH1>방 이름</InfoFormTitleH1>
-          <input
+          <InfoFormTitleH1>방이름</InfoFormTitleH1>
+          <InfoFormInput
             type="text"
             value={roomName}
             onChange={(e) => this.inputRoomName(e)}
+            ref={this.inputRoomNameRef}
           />
           <InfoFormBtn
             onClick={(e) => this.saveRoomName(e)}
@@ -96,7 +100,7 @@ class InfoForm extends Component {
           </InfoFormBtn>
         </InfoFormDiv>
         <InfoFormSubmitBtn isConnect={isConnect}>입장하기</InfoFormSubmitBtn>
-      </InfoFormContainer>
+      </InfoFormWrapper>
     );
   }
 }

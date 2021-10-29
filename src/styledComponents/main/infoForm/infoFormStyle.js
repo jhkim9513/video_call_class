@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import React from "react";
 /* 
 export const name = ({children}) => {
   return <>{children}</>;
@@ -23,7 +23,12 @@ const StyledInfoFormBtn = styled.button.attrs((props) => {
   &:hover {
     transform: scale(1.1);
   }
-  color: ${({ isComplete }) => (isComplete ? "blue" : "black")};
+  color: ${({ isComplete }) =>
+    isComplete ? "rgb(255, 255, 255)" : "rgb(180, 185, 200)"};
+  background-color: ${({ isComplete }) =>
+    isComplete ? "rgb(30, 30, 30)" : "rgb(80, 85,99)"};
+  width: 20%;
+  height: 50%;
 `;
 
 export const InfoFormBtn = ({ children, onClick, isComplete }) => {
@@ -38,10 +43,10 @@ const StyledInfoFormSubmitBtn = styled.button.attrs((props) => {
   return { onClick: props.onClick };
 })`
   cursor: pointer;
-
+  transition: all 250ms ease-in;
   transform: ${({ isConnect }) => (isConnect ? "scale(1.2)" : "scale(1)")};
   background: ${({ isConnect }) =>
-    isConnect ? "rgb(174, 183, 226)" : "transparent"};
+    isConnect ? "rgb(80, 85,99)" : "transparent"};
   color: ${({ isConnect }) => (isConnect ? "white" : "black")};
 `;
 
@@ -54,7 +59,7 @@ export const InfoFormSubmitBtn = ({ children, onClick, isConnect }) => {
 };
 
 /* ----- form ----- */
-const StyledInfoFormContainer = styled.form.attrs((props) => {
+const StyledInfoFormWrapper = styled.form.attrs((props) => {
   return { onSubmit: props.onSubmit };
 })`
   width: 50%;
@@ -64,11 +69,11 @@ const StyledInfoFormContainer = styled.form.attrs((props) => {
   align-items: center;
 `;
 
-export const InfoFormContainer = ({ children, onSubmit }) => {
+export const InfoFormWrapper = ({ children, onSubmit }) => {
   return (
-    <StyledInfoFormContainer onSubmit={onSubmit}>
+    <StyledInfoFormWrapper onSubmit={onSubmit}>
       {children}
-    </StyledInfoFormContainer>
+    </StyledInfoFormWrapper>
   );
 };
 
@@ -77,8 +82,35 @@ const StyledInfoFormDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 300px;
 `;
 
 export const InfoFormDiv = ({ children }) => {
   return <StyledInfoFormDiv>{children}</StyledInfoFormDiv>;
 };
+
+/* ----- input ----- */
+const StyledInfoFormInput = styled.input.attrs((props) => {
+  return {
+    value: props.value,
+    onChange: props.onChange,
+    ref: props.ref ? props.ref : null,
+  };
+})`
+  margin: 0 0.5em;
+  padding: 0.2em;
+  border-radius: 5%;
+`;
+
+export const InfoFormInput = React.forwardRef((props, ref) => {
+  const { children, onChange, value } = props;
+  return (
+    <StyledInfoFormInput
+      value={value}
+      onChange={onChange}
+      ref={ref ? ref : null}
+    >
+      {children}
+    </StyledInfoFormInput>
+  );
+});

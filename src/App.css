@@ -3,6 +3,8 @@
   justify-content: center;
   align-items: center;
   color: rgb(174, 183, 226);
+  transition: all 250ms ease-in;
+  background-color: rgb(50, 55, 59);
 }
 
 /* ----------------- Methods  ----------------- */
