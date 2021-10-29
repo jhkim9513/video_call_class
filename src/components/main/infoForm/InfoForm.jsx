@@ -64,20 +64,22 @@ class InfoForm extends PureComponent {
 
   /* ----------------- Redner  ----------------- */
   render() {
-    console.log("I'm InfoForm.jsx!");
+    // console.log("I'm InfoForm.jsx!");
     const { nickName, roomName, hasNickName, hasRoom } = this.props;
     const isConnect = hasNickName && hasRoom ? true : false;
     return (
       <InfoFormWrapper onSubmit={(e) => this.onSubmit(e)}>
-        <InfoFormDiv>
-          <InfoFormTitleH1>닉네임</InfoFormTitleH1>
+        <InfoFormDiv className="nickNameBox">
+          <InfoFormTitleH1 className="nickNameTitle">닉네임</InfoFormTitleH1>
           <InfoFormInput
             type="text"
+            className="inputNickName"
             value={nickName}
             onChange={(e) => this.inputNickName(e)}
             ref={this.inputNickNameRef}
           />
           <InfoFormBtn
+            className="nickNameBtn"
             onClick={(e) => {
               this.saveNicKName(e);
             }}
@@ -86,22 +88,26 @@ class InfoForm extends PureComponent {
             {hasNickName ? "완료" : "저장"}
           </InfoFormBtn>
         </InfoFormDiv>
-        <InfoFormDiv>
-          <InfoFormTitleH1>방이름</InfoFormTitleH1>
+        <InfoFormDiv className="roomNameBox">
+          <InfoFormTitleH1 className="roomNameTitle">방이름</InfoFormTitleH1>
           <InfoFormInput
             type="text"
+            className="inputRoomName"
             value={roomName}
             onChange={(e) => this.inputRoomName(e)}
             ref={this.inputRoomNameRef}
           />
           <InfoFormBtn
+            className="roomNameBtn"
             onClick={(e) => this.saveRoomName(e)}
             isComplete={hasRoom}
           >
             {hasRoom ? "완료" : "저장"}
           </InfoFormBtn>
         </InfoFormDiv>
-        <InfoFormSubmitBtn isConnect={isConnect}>입장하기</InfoFormSubmitBtn>
+        <InfoFormSubmitBtn className="submitBtn" isConnect={isConnect}>
+          입장하기
+        </InfoFormSubmitBtn>
       </InfoFormWrapper>
     );
   }

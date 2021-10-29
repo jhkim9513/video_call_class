@@ -10,14 +10,14 @@ export const name = ({children}) => {
 const StyledInfoFormTitleH1 = styled.h1`
   font-size: 1.2rem;
 `;
-
 export const InfoFormTitleH1 = ({ children }) => {
   return <StyledInfoFormTitleH1>{children}</StyledInfoFormTitleH1>;
 };
 
 /* ----- button ----- */
 const StyledInfoFormBtn = styled.button.attrs((props) => {
-  return { onClick: props.onClick };
+  const { onClick } = props;
+  return { onClick };
 })`
   cursor: pointer;
   &:hover {
@@ -30,7 +30,6 @@ const StyledInfoFormBtn = styled.button.attrs((props) => {
   width: 20%;
   height: 50%;
 `;
-
 export const InfoFormBtn = ({ children, onClick, isComplete }) => {
   return (
     <StyledInfoFormBtn onClick={onClick} isComplete={isComplete}>
@@ -40,7 +39,8 @@ export const InfoFormBtn = ({ children, onClick, isComplete }) => {
 };
 
 const StyledInfoFormSubmitBtn = styled.button.attrs((props) => {
-  return { onClick: props.onClick };
+  const { onClick } = props;
+  return { onClick };
 })`
   cursor: pointer;
   transition: all 250ms ease-in;
@@ -49,7 +49,6 @@ const StyledInfoFormSubmitBtn = styled.button.attrs((props) => {
     isConnect ? "rgb(80, 85,99)" : "transparent"};
   color: ${({ isConnect }) => (isConnect ? "white" : "black")};
 `;
-
 export const InfoFormSubmitBtn = ({ children, onClick, isConnect }) => {
   return (
     <StyledInfoFormSubmitBtn onClick={onClick} isConnect={isConnect}>
@@ -84,24 +83,23 @@ const StyledInfoFormDiv = styled.div`
   align-items: center;
   width: 300px;
 `;
-
 export const InfoFormDiv = ({ children }) => {
   return <StyledInfoFormDiv>{children}</StyledInfoFormDiv>;
 };
 
 /* ----- input ----- */
 const StyledInfoFormInput = styled.input.attrs((props) => {
+  const { value, onChange, ref } = props;
   return {
-    value: props.value,
-    onChange: props.onChange,
-    ref: props.ref ? props.ref : null,
+    value: value,
+    onChange: onChange,
+    ref: ref ? ref : null,
   };
 })`
   margin: 0 0.5em;
   padding: 0.2em;
   border-radius: 5%;
 `;
-
 export const InfoFormInput = React.forwardRef((props, ref) => {
   const { children, onChange, value } = props;
   return (

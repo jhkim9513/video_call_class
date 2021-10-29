@@ -6,7 +6,7 @@ import {
 
 class Header extends PureComponent {
   render() {
-    console.log("I'm Header.jsx!");
+    // console.log("I'm Header.jsx!");
     return (
       <HeaderContainer>
         <HeaderTitle>Video Call</HeaderTitle>

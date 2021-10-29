@@ -1,6 +1,7 @@
 .anony {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   color: rgb(174, 183, 226);
   transition: all 250ms ease-in;

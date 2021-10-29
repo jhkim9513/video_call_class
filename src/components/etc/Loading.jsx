@@ -38,7 +38,7 @@ class Loading extends PureComponent {
 
   /* ----------------- Redner  ----------------- */
   render() {
-    console.log("I'm Loading.jsx!");
+    // console.log("I'm Loading.jsx!");
     return <LoadingDiv></LoadingDiv>;
   }
 }

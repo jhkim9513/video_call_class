@@ -1,6 +1,15 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { clickCameraBtn, clickMuteBtn } from "../../../redux/room/actions";
+import {
+  DeviceBtn,
+  DeviceSelect,
+  DeviceSettingBox,
+  RoomTitleH1,
+  Video,
+  VideoBox,
+  VideoScreenContainer,
+} from "../../../styledComponents/main/videoScreen/videoScreenStyle";
 import getCameras from "../../SocketIO/getCameras";
 import startSocketNet from "../../SocketIO/startSocketNet";
 
@@ -66,34 +75,29 @@ class VideoScreen extends PureComponent {
 
   /* ----------------- Redner  ----------------- */
   render() {
-    console.log("I'm VideoScreen.jsx!");
+    // console.log("I'm VideoScreen.jsx!");
     const { muteBtn, cameraBtn, roomName, myStream } = this.props;
     return (
-      <div>
-        <h1>Room : {roomName}</h1>
-        <video
-          ref={this.myFaceRef}
-          autoPlay
-          width="500px"
-          height="500px"
-        ></video>
-        <video
-          ref={this.peerFaceRef}
-          autoPlay
-          width="500px"
-          height="500px"
-        ></video>
+      <VideoScreenContainer>
+        <RoomTitleH1>Room : {roomName}</RoomTitleH1>
+        <VideoBox>
+          <Video className="myFaceVideo" ref={this.myFaceRef}></Video>
+          <Video className="peerFaceVideo" ref={this.peerFaceRef}></Video>
+        </VideoBox>
 
         {myStream !== "don't have stream" && (
-          <div>
-            <button className="muteBtn" onClick={(e) => this.clickMuteBtn(e)}>
+          <DeviceSettingBox>
+            <DeviceBtn
+              className="muteBtn"
+              onClick={(e) => this.clickMuteBtn(e)}
+            >
               {!muteBtn ? (
                 <i className="fas fa-volume-up"></i>
               ) : (
                 <i className="fas fa-volume-mute"></i>
               )}
-            </button>
-            <button
+            </DeviceBtn>
+            <DeviceBtn
               className="cameraBtn"
               onClick={(e) => this.clickCameraBtn(e)}
             >
@@ -102,11 +106,14 @@ class VideoScreen extends PureComponent {
               ) : (
                 <i className="fas fa-video-slash"></i>
               )}
-            </button>
-            <select className="selectCamera" ref={this.selectRef}></select>
-          </div>
+            </DeviceBtn>
+            <DeviceSelect
+              className="selectCamera"
+              ref={this.selectRef}
+            ></DeviceSelect>
+          </DeviceSettingBox>
         )}
-      </div>
+      </VideoScreenContainer>
     );
   }
 }
