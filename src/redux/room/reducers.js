@@ -4,6 +4,7 @@ import {
   clickMuteBtn,
   inputRoomName,
   setCameras,
+  setDataChannel,
   setMyStream,
   setPeerConnection,
   setRoomName,
@@ -17,6 +18,7 @@ const initialState = {
   cameras: null,
   muteBtn: false,
   cameraBtn: false,
+  dataChannel: null,
 };
 
 export const roomReducer = createReducer(initialState, (builder) => {
@@ -43,5 +45,8 @@ export const roomReducer = createReducer(initialState, (builder) => {
     })
     .addCase(clickCameraBtn, (state, action) => {
       state.cameraBtn = !state.cameraBtn;
+    })
+    .addCase(setDataChannel, (state, action) => {
+      state.dataChannel = action.payload;
     });
 });

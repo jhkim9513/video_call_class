@@ -9,9 +9,12 @@ import {
   Video,
   VideoBox,
   VideoScreenContainer,
+  InputChatArea,
 } from "../../../styledComponents/main/videoScreen/videoScreenStyle";
 import getCameras from "../../../SocketIO/getCameras";
 import startSocketNet from "../../../SocketIO/startSocketNet";
+import makeDataChannel from "../../../SocketIO/makeDataChannel";
+import { inputMyMessage, setPeerMessage } from "../../../redux/user/actions";
 
 class VideoScreen extends PureComponent {
   constructor(props) {
@@ -21,6 +24,7 @@ class VideoScreen extends PureComponent {
   myFaceRef = React.createRef();
   peerFaceRef = React.createRef();
   selectRef = React.createRef();
+  inputChatRef = React.createRef();
   /* ----------------- Methods  ----------------- */
 
   async printStream(deviceId) {
@@ -47,7 +51,6 @@ class VideoScreen extends PureComponent {
       .forEach((track) => (track.enabled = !track.enabled));
 
     dispatchClickMuteBtn();
-    console.log("clickMute!");
   }
 
   clickCameraBtn(e) {
@@ -62,6 +65,22 @@ class VideoScreen extends PureComponent {
     dispatchClickCameraBtn();
   }
 
+  isInputEnter(e) {
+    const { dataChannel } = this.props;
+    const { dispatchInputMyMessage } = this.props;
+
+    if (e.key === "Enter") {
+      console.log("Enter!!!");
+      dataChannel.send(e.target.value);
+      dispatchInputMyMessage("");
+    }
+  }
+
+  inputMyMessage(e) {
+    const { dispatchInputMyMessage } = this.props;
+    dispatchInputMyMessage(e.target.value);
+  }
+
   /* ----------------- LifeCycle  ----------------- */
   componentDidMount() {
     const { hasNickName, hasRoom } = this.props;
@@ -70,18 +89,34 @@ class VideoScreen extends PureComponent {
       return;
     }
     this.printStream(null);
+    makeDataChannel();
     startSocketNet(this.peerFaceRef);
+  }
+
+  componentDidUpdate() {
+    const { myMessage, peerMessage } = this.props;
+    const { dispatchSetPeerMessage } = this.props;
+    if (peerMessage) {
+      console.log(peerMessage);
+      dispatchSetPeerMessage("");
+    }
   }
 
   /* ----------------- Redner  ----------------- */
   render() {
     // console.log("I'm VideoScreen.jsx!");
-    const { muteBtn, cameraBtn, roomName, myStream } = this.props;
+    const { muteBtn, cameraBtn, roomName, myStream, myMessage } = this.props;
     return (
       <VideoScreenContainer>
         <RoomTitleH1>Room : {roomName}</RoomTitleH1>
         <VideoBox>
           <Video className="myFaceVideo" ref={this.myFaceRef}></Video>
+          <InputChatArea
+            ref={this.inputChatRef}
+            onKeyDown={(e) => this.isInputEnter(e)}
+            onChange={(e) => this.inputMyMessage(e)}
+            value={myMessage}
+          ></InputChatArea>
           <Video className="peerFaceVideo" ref={this.peerFaceRef}></Video>
         </VideoBox>
 
@@ -127,6 +162,9 @@ const mapStateToProps = (state, props) => {
     myStream: state.roomReducer.myStream,
     muteBtn: state.roomReducer.muteBtn,
     cameraBtn: state.roomReducer.cameraBtn,
+    dataChannel: state.roomReducer.dataChannel,
+    myMessage: state.userReducer.myMessage,
+    peerMessage: state.userReducer.peerMessage,
   };
 };
 
@@ -137,6 +175,12 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     dispatchClickCameraBtn: () => {
       dispatch(clickCameraBtn());
+    },
+    dispatchSetPeerMessage: (peerMessage) => {
+      dispatch(setPeerMessage(peerMessage));
+    },
+    dispatchInputMyMessage: (text) => {
+      dispatch(inputMyMessage(text));
     },
   };
 };

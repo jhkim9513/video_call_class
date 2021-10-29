@@ -7,3 +7,4 @@ export const setPeerConnection = createAction("room/setPeerConnection");
 export const setCameras = createAction("room/setCameras");
 export const clickMuteBtn = createAction("room/clickMuteBtn");
 export const clickCameraBtn = createAction("room/clickCameraBtn");
+export const setDataChannel = createAction("room/setDataChannel");

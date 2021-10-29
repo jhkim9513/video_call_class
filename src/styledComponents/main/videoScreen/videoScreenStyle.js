@@ -86,3 +86,29 @@ export const DeviceSelect = React.forwardRef((props, ref) => {
   const { children } = props;
   return <StyledDeviceSelect ref={ref}>{children}</StyledDeviceSelect>;
 });
+
+/* ----- select ----- */
+const StyledInputChatArea = styled.textarea.attrs((props) => {
+  const { ref, onKeyDown, value, onChange } = props;
+  return {
+    ref,
+    onKeyDown,
+    value,
+    onChange,
+  };
+})`
+  width: 250px;
+`;
+export const InputChatArea = React.forwardRef((props, ref) => {
+  const { children, onKeyDown, value, onChange } = props;
+  return (
+    <StyledInputChatArea
+      ref={ref}
+      onKeyDown={onKeyDown}
+      value={value}
+      onChange={onChange}
+    >
+      {children}
+    </StyledInputChatArea>
+  );
+});
