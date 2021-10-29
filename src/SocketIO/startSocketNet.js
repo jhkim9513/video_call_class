@@ -1,6 +1,6 @@
 import io from "socket.io-client";
-import { setPeerConnection } from "../../redux/room/actions";
-import store from "../../redux/store";
+import { setPeerConnection } from "../redux/room/actions";
+import store from "../redux/store";
 
 function startSocketNet(peerFaceRef) {
   const socket = io("http://localhost:8080", {
@@ -17,6 +17,9 @@ function startSocketNet(peerFaceRef) {
   console.log(`peerConnection : ${peerConnection}`);
   // on("welcome")은 peerA측에서 돌아가는 코드
   socket.on("welcome", async () => {
+    let myDataChannel = peerConnection.createDataChannel("chat");
+    myDataChannel.addEventListener("message", console.log);
+    console.log("made data channel");
     // 방에 누군가 접속했을 때 offer를 생성한다.
     // 생성된 offer에는 sdp라는 다른 브라우저가 참가할 수 있는 초대장?이 있다.
     const offer = await peerConnection.createOffer();
@@ -34,6 +37,7 @@ function startSocketNet(peerFaceRef) {
 
   // on("offer")는 peerB측에서 돌아가는 코드
   socket.on("offer", async (offer) => {
+    peerConnection.addEventListener("datachannel", console.log);
     console.log("received the offer");
     // 전달 받은 offer로 remoteDescription 설정
     peerConnection.setRemoteDescription(offer);

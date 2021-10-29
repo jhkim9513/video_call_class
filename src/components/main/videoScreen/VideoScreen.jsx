@@ -10,8 +10,8 @@ import {
   VideoBox,
   VideoScreenContainer,
 } from "../../../styledComponents/main/videoScreen/videoScreenStyle";
-import getCameras from "../../SocketIO/getCameras";
-import startSocketNet from "../../SocketIO/startSocketNet";
+import getCameras from "../../../SocketIO/getCameras";
+import startSocketNet from "../../../SocketIO/startSocketNet";
 
 class VideoScreen extends PureComponent {
   constructor(props) {

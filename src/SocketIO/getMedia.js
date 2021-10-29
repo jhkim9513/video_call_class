@@ -1,5 +1,5 @@
-import { setMyStream } from "../../redux/room/actions";
-import store from "../../redux/store";
+import { setMyStream } from "../redux/room/actions";
+import store from "../redux/store";
 
 async function getMedia(deviceId) {
   const initialConstrains = {

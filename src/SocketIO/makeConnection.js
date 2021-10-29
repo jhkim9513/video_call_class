@@ -1,5 +1,5 @@
-import { setPeerConnection } from "../../redux/room/actions";
-import store from "../../redux/store";
+import { setPeerConnection } from "../redux/room/actions";
+import store from "../redux/store";
 const makeConnection = () => {
   // 서로 다른 사용자간의 연결을 위해 생성
   const tempMyPeerConnection = new RTCPeerConnection({

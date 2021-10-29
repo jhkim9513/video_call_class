@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { LoadingDiv } from "../../styledComponents/etc/loadingStyle";
-import getMedia from "../SocketIO/getMedia";
-import makeConnection from "../SocketIO/makeConnection";
+import getMedia from "../../SocketIO/getMedia";
+import makeConnection from "../../SocketIO/makeConnection";
 
 class Loading extends PureComponent {
   constructor(props) {
