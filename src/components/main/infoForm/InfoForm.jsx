@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   InfoFormTitleH1,
   InfoFormBtn,
@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { inputNickName, setNickName } from "../../../redux/user/actions";
 import { inputRoomName, setRoomName } from "../../../redux/room/actions";
 
-class InfoForm extends Component {
+class InfoForm extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
@@ -61,8 +61,10 @@ class InfoForm extends Component {
   componentDidMount() {
     this.inputNickNameRef.current.focus();
   }
+
   /* ----------------- Redner  ----------------- */
   render() {
+    console.log("I'm InfoForm.jsx!");
     const { nickName, roomName, hasNickName, hasRoom } = this.props;
     const isConnect = hasNickName && hasRoom ? true : false;
     return (

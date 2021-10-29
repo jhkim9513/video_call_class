@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { LoadingDiv } from "../../styledComponents/etc/loadingStyle";
 import getMedia from "../SocketIO/getMedia";
 import makeConnection from "../SocketIO/makeConnection";
 
-class Loading extends Component {
+class Loading extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
@@ -38,6 +38,7 @@ class Loading extends Component {
 
   /* ----------------- Redner  ----------------- */
   render() {
+    console.log("I'm Loading.jsx!");
     return <LoadingDiv></LoadingDiv>;
   }
 }

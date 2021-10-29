@@ -13,6 +13,7 @@ class App extends Component {
       <AppContainer>
         <BrowserRouter>
           <Header />
+
           <Switch>
             <Route exact path="/" component={InfoForm} />
             <Route exact path="/loading" component={Loading} />

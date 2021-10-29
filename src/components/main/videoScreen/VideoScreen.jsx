@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { clickCameraBtn, clickMuteBtn } from "../../../redux/room/actions";
 import getCameras from "../../SocketIO/getCameras";
 import startSocketNet from "../../SocketIO/startSocketNet";
 
-class VideoScreen extends Component {
+class VideoScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
@@ -66,6 +66,7 @@ class VideoScreen extends Component {
 
   /* ----------------- Redner  ----------------- */
   render() {
+    console.log("I'm VideoScreen.jsx!");
     const { muteBtn, cameraBtn, roomName, myStream } = this.props;
     return (
       <div>
